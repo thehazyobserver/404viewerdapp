@@ -1,64 +1,53 @@
 import React, { useState, useEffect } from "react";
-import NFTCard from "./components/NFTCard";
-import { fetchAvailableTokens, fetchTokenMetadata } from "./utils/stonercontract";
-import "./App.css"; // Make sure you have a basic App.css file for styling.
+import "./App.css";
 
-export default function App() {
-  const [nfts, setNFTs] = useState([]); // Store the fetched NFTs
-  const [currentPage, setCurrentPage] = useState(1); // For pagination
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
+function App() {
+  const [nfts, setNFTs] = useState([]); // State to store NFTs
+  const [error, setError] = useState(null); // State to store errors
 
-  const limit = 10; // Number of NFTs to fetch per page
-
-  // Fetch NFTs whenever the page changes
   useEffect(() => {
-    const loadNFTs = async () => {
-      setLoading(true);
-      setError(null);
-
+    const fetchNFTs = async () => {
       try {
-        const { total, tokenIds } = await fetchAvailableTokens(currentPage, limit); // Fetch token IDs
-        const metadataList = await Promise.all(
-          tokenIds.map(async (id) => {
-            const metadata = await fetchTokenMetadata(id); // Fetch metadata for each token
-            return { id, ...metadata };
-          })
-        );
-
-        setNFTs((prevNFTs) => [...prevNFTs, ...metadataList]); // Append new NFTs to the list
+        // Replace this with your actual blockchain API or contract call
+        const response = await fetch("https://fake-blockchain-api.com/data"); 
+        if (!response.ok) {
+          throw new Error("Failed to fetch blockchain data");
+        }
+        const data = await response.json();
+        setNFTs(data); // Set the fetched NFT data
       } catch (err) {
         console.error(err);
-        setError("Failed to load NFTs. Please try again.");
-      } finally {
-        setLoading(false);
+        setError("Unable to load blockchain data."); // Set error state
       }
     };
 
-    loadNFTs();
-  }, [currentPage]);
-
-  const loadMore = () => {
-    setCurrentPage((prevPage) => prevPage + 1); // Increment the page
-  };
+    fetchNFTs();
+  }, []);
 
   return (
-    <div className="app-container">
-      <h1 className="app-title">Available NFTs</h1>
-      <div className="nft-grid">
-        {nfts.map((nft) => (
-          <NFTCard key={nft.id} nft={nft} />
-        ))}
-      </div>
-
-      {loading && <p className="loading-text">Loading...</p>}
-      {error && <p className="error-text">{error}</p>}
-
-      {!loading && !error && (
-        <button className="load-more-button" onClick={loadMore} disabled={loading}>
-          Load More
-        </button>
+    <div className="App">
+      {error ? (
+        <div className="error-screen">
+          <div className="background-image"></div>
+          <h1>Oops! Something went wrong.</h1>
+          <p>{error}</p>
+        </div>
+      ) : (
+        <div className="nft-gallery">
+          {nfts.length > 0 ? (
+            nfts.map((nft, index) => (
+              <div key={index} className="nft-card">
+                <img src={nft.image} alt={nft.name} />
+                <h3>{nft.name}</h3>
+              </div>
+            ))
+          ) : (
+            <p>Loading NFTs...</p> // Show loading text while NFTs are being fetched
+          )}
+        </div>
       )}
     </div>
   );
 }
+
+export default App;
