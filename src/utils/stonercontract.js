@@ -12,12 +12,12 @@ const stonerABI = [
 ];
 
 // Initialize the Stoner Contract
-const stonerContract = new ethers.Contract(contractAddress, stonerABI, provider);
+const stonercontract = new ethers.Contract(contractAddress, stonerABI, provider);
 
 // Fetch available token IDs
 export const fetchAvailableTokens = async (currentPage = 1, limit = 10) => {
   try {
-    const totalAvailableIds = await stonerContract.totalAvailableIds();
+    const totalAvailableIds = await stonercontract.totalAvailableIds();
     const total = Number(totalAvailableIds);
 
     const start = total - currentPage * limit;
@@ -26,7 +26,7 @@ export const fetchAvailableTokens = async (currentPage = 1, limit = 10) => {
     const tokenIds = [];
     for (let i = start; i < end; i++) {
       if (i >= 0) {
-        const tokenId = await stonerContract.availableIds(i);
+        const tokenId = await stonercontract.availableIds(i);
         tokenIds.push(Number(tokenId));
       }
     }
@@ -41,7 +41,7 @@ export const fetchAvailableTokens = async (currentPage = 1, limit = 10) => {
 // Fetch metadata for a specific token
 export const fetchTokenMetadata = async (tokenId) => {
   try {
-    const tokenURI = await stonerContract.tokenURI(tokenId);
+    const tokenURI = await stonercontract.tokenURI(tokenId);
     const response = await fetch(tokenURI);
     return await response.json();
   } catch (error) {

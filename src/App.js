@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NFTCard from "./components/NFTCard";
-import { fetchAvailableTokens, fetchTokenMetadata } from "./utils/stonerContract";
+import { fetchAvailableTokens, fetchTokenMetadata } from "./utils/stonercontract";
 import "./App.css"; // Make sure you have a basic App.css file for styling.
 
 export default function App() {
