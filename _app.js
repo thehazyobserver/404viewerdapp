@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import { fetchAvailableTokens, fetchTokenMetadata } from "../utils/stonercontract.js";
+import React, { useState, useEffect } from "react";
+import NFTCard from "./components/NFTCard";
+import { fetchAvailableTokens, fetchTokenMetadata } from "./utils/stonerContract";
 
-export default function Home() {
+export default function App() {
   const [nfts, setNFTs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -35,18 +36,16 @@ export default function Home() {
     loadNFTs();
   }, [currentPage]);
 
-  const loadMore = () => setCurrentPage((prevPage) => prevPage + 1);
+  const loadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div className="container">
       <h1>Available NFTs</h1>
       <div className="nft-grid">
         {nfts.map((nft) => (
-          <div key={nft.id} className="nft-card">
-            <img src={nft.image} alt={nft.name} />
-            <h2>{nft.name}</h2>
-            <p>{nft.description}</p>
-          </div>
+          <NFTCard key={nft.id} nft={nft} />
         ))}
       </div>
 
