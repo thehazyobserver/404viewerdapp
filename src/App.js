@@ -53,7 +53,11 @@ function App() {
         setNFTs(nftData);
       } catch (err) {
         console.error("Error fetching NFTs:", err);
-        setError("Failed to load NFTs from the blockchain.");
+        if (err.code === 'UNSUPPORTED_OPERATION') {
+          setError("The network does not support ENS. Please connect to a supported network.");
+        } else {
+          setError("Failed to load NFTs from the blockchain.");
+        }
       }
     };
 
