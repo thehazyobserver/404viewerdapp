@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import "./App.css";
 
 const rpcUrl = "https://rpc.soniclabs.com";
-const contractAddress = "0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb"; // Replace with your contract address
+const contractAddress = "0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb";
 const abi = [
   {
     inputs: [],
@@ -31,28 +31,32 @@ const abi = [
 function App() {
   const [nfts, setNFTs] = useState([]);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalAvailableIds, setTotalAvailableIds] = useState(0);
+  const itemsPerPage = 20;
 
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
-        const provider = new ethers.providers.JsonRpcProvider(rpcUrl, {
-          name: "sonic",
-          chainId: 146, // Replace with the correct Sonic Mainnet chain ID
-        });
-
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
         const contract = new ethers.Contract(contractAddress, abi, provider);
 
-        // Fetch total available IDs
-        const totalAvailableIds = await contract.totalAvailableIds();
-        const nftPromises = [];
+        if (currentPage === 1) {
+          const totalIds = await contract.totalAvailableIds();
+          setTotalAvailableIds(totalIds);
+        }
 
-        for (let i = 0; i < totalAvailableIds; i++) {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalAvailableIds);
+
+        const nftPromises = [];
+        for (let i = startIndex; i < endIndex; i++) {
           const id = await contract.availableIds(i);
           nftPromises.push(fetchMetadata(contract, id));
         }
 
         const nftData = await Promise.all(nftPromises);
-        setNFTs(nftData);
+        setNFTs((prevNFTs) => [...prevNFTs, ...nftData]);
       } catch (err) {
         console.error("Error fetching NFTs:", err);
         setError("Failed to load NFTs from the blockchain.");
@@ -62,21 +66,35 @@ function App() {
     const fetchMetadata = async (contract, id) => {
       try {
         const tokenURI = await contract.tokenURI(id);
-        const response = await fetch(tokenURI);
+        const httpURI = tokenURI.startsWith("ipfs://")
+          ? tokenURI.replace("ipfs://", "https://ftmholidaycelebration.mypinata.cloud/ipfs/")
+          : tokenURI;
+
+        const response = await fetch(httpURI);
+        if (!response.ok) throw new Error(`Failed to fetch metadata for ID ${id}`);
         const metadata = await response.json();
+
         return {
           id: id.toString(),
-          image: metadata.image,
+          image: metadata.image.startsWith("ipfs://")
+            ? metadata.image.replace("ipfs://", "https://ftmholidaycelebration.mypinata.cloud/ipfs/")
+            : metadata.image,
           name: metadata.name,
+          description: metadata.description,
+          attributes: metadata.attributes,
         };
       } catch (err) {
         console.error(`Error fetching metadata for ID ${id}:`, err);
-        return { id: id.toString(), image: null, name: "Unknown NFT" };
+        return { id: id.toString(), image: null, name: "Unknown NFT", description: "N/A", attributes: [] };
       }
     };
 
     fetchNFTs();
-  }, []);
+  }, [currentPage]);
+
+  const loadMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <div className="App">
@@ -85,22 +103,35 @@ function App() {
           <h1>Error</h1>
           <p>{error}</p>
         </div>
-      ) : nfts.length > 0 ? (
-        <div className="nft-gallery">
-          {nfts.map((nft) => (
-            <div key={nft.id} className="nft-card">
-              {nft.image ? (
-                <img src={nft.image} alt={nft.name} />
-              ) : (
-                <div className="placeholder">Image Not Available</div>
-              )}
-              <h3>{nft.name}</h3>
-              <p>ID: #{nft.id}</p>
-            </div>
-          ))}
-        </div>
       ) : (
-        <p>Loading NFTs...</p>
+        <>
+          <div className="nft-gallery">
+            {nfts.map((nft) => (
+              <div key={nft.id} className="nft-card">
+                {nft.image ? (
+                  <img src={nft.image} alt={nft.name} />
+                ) : (
+                  <div className="placeholder">Image Not Available</div>
+                )}
+                <h3>{nft.name}</h3>
+                <p>{nft.description}</p>
+                <ul>
+                  {nft.attributes.map((attr, index) => (
+                    <li key={index}>
+                      {attr.trait_type}: {attr.value}
+                    </li>
+                  ))}
+                </ul>
+                <p>ID: #{nft.id}</p>
+              </div>
+            ))}
+          </div>
+          {nfts.length < totalAvailableIds && (
+            <button onClick={loadMore} className="load-more">
+              Load More
+            </button>
+          )}
+        </>
       )}
     </div>
   );
