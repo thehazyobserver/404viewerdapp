@@ -16,4 +16,3 @@ root.render(
 
 // Measure app performance (optional)
 // You can replace console.log with your analytics endpoint if needed
-reportWebVitals(console.log);
