@@ -5,27 +5,27 @@ import "./App.css";
 const rpcUrl = "https://rpc.soniclabs.com";
 const contractAddress = "0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb"; // Replace with your contract address
 const abi = [
-  [
-    {
-      "inputs": [
-        {
-          "internalType": "bytes4",
-          "name": "interfaceId",
-          "type": "bytes4"
-        }
-      ],
-      "name": "supportsInterface",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ]
+  {
+    inputs: [],
+    name: "totalAvailableIds",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "availableIds",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "id", type: "uint256" }],
+    name: "tokenURI",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "view",
+    type: "function",
+  },
 ];
 
 function App() {
@@ -35,15 +35,14 @@ function App() {
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
-        // Define provider explicitly for Sonic Mainnet
         const provider = new ethers.providers.JsonRpcProvider(rpcUrl, {
           name: "sonic",
-          chainId: 146, // Replace with Sonic Mainnet chain ID
+          chainId: 146, // Replace with the correct Sonic Mainnet chain ID
         });
 
         const contract = new ethers.Contract(contractAddress, abi, provider);
 
-        // Fetch available IDs
+        // Fetch total available IDs
         const totalAvailableIds = await contract.totalAvailableIds();
         const nftPromises = [];
 
@@ -86,16 +85,22 @@ function App() {
           <h1>Error</h1>
           <p>{error}</p>
         </div>
-      ) : (
+      ) : nfts.length > 0 ? (
         <div className="nft-gallery">
           {nfts.map((nft) => (
             <div key={nft.id} className="nft-card">
-              <img src={nft.image} alt={nft.name} />
+              {nft.image ? (
+                <img src={nft.image} alt={nft.name} />
+              ) : (
+                <div className="placeholder">Image Not Available</div>
+              )}
               <h3>{nft.name}</h3>
               <p>ID: #{nft.id}</p>
             </div>
           ))}
         </div>
+      ) : (
+        <p>Loading NFTs...</p>
       )}
     </div>
   );
