@@ -1,31 +1,30 @@
 .App {
   text-align: center;
   font-family: Arial, sans-serif;
-}
-
-.error-screen {
-  background-color: #1e90ff; /* Blue background */
-  height: 100vh; /* Full-screen height */
+  background-color: #1e1e1e;
+  color: #fff;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: white;
+  justify-content: center;
 }
 
 .nft-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nft-card {
-  background: #fff;
-  border: 1px solid #ccc;
+  background: #333;
+  padding: 15px;
   border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 .nft-card img {
@@ -33,7 +32,7 @@
   border-radius: 10px;
 }
 
-p {
-  color: gray;
-  font-size: 1.2rem;
+.error-screen {
+  color: red;
+  text-align: center;
 }
