@@ -50,7 +50,7 @@ function App() {
         const endIndex = Math.min(startIndex + itemsPerPage, totalAvailableIds);
 
         const nftPromises = [];
-        for (let i = startIndex; i < endIndex; i++) {
+        for (let i = endIndex - 1; i >= startIndex; i--) {
           const id = await contract.availableIds(i);
           nftPromises.push(fetchMetadata(contract, id));
         }
