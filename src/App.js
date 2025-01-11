@@ -104,7 +104,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>$STONER UPCOMING TOKEN IDS</h1>
+        <h1>UPCOMING $STONER TOKEN IDS</h1>
         <p>Trade $JOINT for $STONER on Equalizer</p>
         <p>$STONER CA: 0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb</p>
         <p>
