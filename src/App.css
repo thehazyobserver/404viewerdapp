@@ -8,18 +8,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 10px; /* Adjusted for mobile */
+  justify-content: flex-start; /* Adjust for header and gallery alignment */
+  padding: 10px;
   overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* NFT Gallery Layout */
 .nft-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adapts for smaller screens */
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ensure responsiveness for mobile */
+  gap: 10px; /* Reduce gap for small screens */
   padding: 10px;
-  max-width: 1200px;
+  max-width: 100%; /* Adjust to avoid overflow */
   margin: 0 auto;
 }
 
@@ -37,7 +37,7 @@
 
 .nft-card img {
   max-width: 100%;
-  height: auto; /* Ensure images scale properly */
+  height: auto;
   border-radius: 10px;
 }
 
@@ -73,15 +73,17 @@
 .App-header {
   text-align: center;
   margin-bottom: 20px;
+  width: 100%; /* Full width on mobile */
 }
 
 .App-header h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin-bottom: 10px;
+  word-wrap: break-word; /* Prevent text overflow */
 }
 
 .App-header p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 5px 0;
 }
 
@@ -94,8 +96,8 @@
 }
 
 .ButtonContainer img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   transition: transform 0.3s ease;
 }
 
@@ -122,50 +124,53 @@
 }
 
 /* Responsive Media Queries */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .App-header h1 {
     font-size: 1.5rem;
+    text-align: center;
   }
 
   .App-header p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 5px 0;
   }
 
   .ButtonContainer img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 
-  .nft-card h3 {
-    font-size: 0.9rem;
+  .nft-card {
+    padding: 8px;
   }
 
-  .nft-card p, .nft-card ul li {
-    font-size: 0.8rem;
+  .nft-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller grid items for mobile */
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .App-header p {
+    font-size: 0.7rem;
+  }
+
+  .ButtonContainer img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .nft-card {
+    padding: 6px;
   }
 
   .load-more {
     font-size: 14px;
     padding: 8px 16px;
-  }
-}
-
-@media (min-width: 768px) {
-  .nft-gallery {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Slightly larger cards for tablets */
-  }
-
-  .nft-card h3 {
-    font-size: 1.2rem;
-  }
-
-  .nft-card p {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .nft-gallery {
-    grid-template-columns: repeat(4, 1fr); /* Fixed layout for very large screens */
   }
 }
