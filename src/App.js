@@ -47,7 +47,7 @@ function App() {
           setTotalAvailableIds(totalIds.toNumber());
         }
 
-        const startIndex = totalAvailableIds - (currentPage * itemsPerPage);
+        const startIndex = totalAvailableIds - (currentPage - 1) * itemsPerPage;
         const endIndex = Math.max(startIndex - itemsPerPage, 0);
 
         const nftPromises = [];
