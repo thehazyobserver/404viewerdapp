@@ -50,13 +50,13 @@ function App() {
         const endIndex = Math.min(startIndex + itemsPerPage, totalAvailableIds);
 
         const nftPromises = [];
-        for (let i = endIndex - 1; i >= startIndex; i--) {
+        for (let i = startIndex; i < endIndex; i++) {
           const id = await contract.availableIds(i);
           nftPromises.push(fetchMetadata(contract, id));
         }
 
         const nftData = await Promise.all(nftPromises);
-        setNFTs((prevNFTs) => [...prevNFTs, ...nftData]);
+        setNFTs((prevNFTs) => [...nftData.reverse(), ...prevNFTs]);
       } catch (err) {
         console.error("Error fetching NFTs:", err);
         setError("Failed to load NFTs from the blockchain.");
