@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     const fetchNFTs = async () => {
       try {
-        const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+        const provider = new ethers.providers.JsonRpcProvider(rpcUrl, { chainId });
         const contract = new ethers.Contract(contractAddress, abi, provider);
 
         if (currentPage === 1) {
