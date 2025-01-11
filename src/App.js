@@ -34,7 +34,7 @@ function App() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalAvailableIds, setTotalAvailableIds] = useState(0);
-  const itemsPerPage = 20;
+  const itemsPerPage = 10; // Load 10 items per page
 
   useEffect(() => {
     const fetchNFTs = async () => {
