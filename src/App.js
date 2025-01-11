@@ -47,11 +47,11 @@ function App() {
           setTotalAvailableIds(totalIds.toNumber());
         }
 
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = Math.min(startIndex + itemsPerPage, totalAvailableIds);
+        const startIndex = totalAvailableIds - (currentPage * itemsPerPage);
+        const endIndex = Math.max(startIndex - itemsPerPage, 0);
 
         const nftPromises = [];
-        for (let i = startIndex; i < endIndex; i++) {
+        for (let i = startIndex - 1; i >= endIndex; i--) {
           const id = await contract.availableIds(i);
           nftPromises.push(fetchMetadata(contract, id));
         }
