@@ -136,8 +136,9 @@ function App() {
       ) : (
         <>
           <div className="nft-gallery">
-            {nfts.map((nft) => (
+            {nfts.map((nft, index) => (
               <div key={nft.id} className="nft-card">
+                <div className="nft-number">#{index + 1}</div>
                 {nft.image ? (
                   <img src={nft.image} alt={nft.name} />
                 ) : (
