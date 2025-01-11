@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; /* Ensure the number is positioned relative to the card */
 }
 
 .nft-card img {
@@ -60,6 +61,18 @@
 
 .nft-card ul li {
   color: #aaa;
+}
+
+/* NFT Number Styles */
+.nft-number {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 /* Error Screen */
@@ -173,14 +186,4 @@
     font-size: 14px;
     padding: 8px 16px;
   }
-}
-.nft-number {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1rem;
 }
