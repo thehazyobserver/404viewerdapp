@@ -90,7 +90,7 @@ function App() {
     };
 
     fetchNFTs();
-  }, [currentPage]);
+  }, [currentPage, totalAvailableIds]);
 
   const loadMore = () => {
     setCurrentPage((prevPage) => prevPage + 1);
