@@ -44,7 +44,7 @@ function App() {
 
         if (currentPage === 1) {
           const totalIds = await contract.totalAvailableIds();
-          setTotalAvailableIds(totalIds);
+          setTotalAvailableIds(totalIds.toNumber());
         }
 
         const startIndex = (currentPage - 1) * itemsPerPage;
