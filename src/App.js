@@ -4,7 +4,7 @@ import "./App.css";
 import paintswapImage from './assets/paintswap.svg'; // Update the path as needed
 import twitterImage from './assets/x.png'; // Update the path as needed
 import telegramImage from './assets/telegram.png'; // Update the path as needed
-import passTheJointImage from './assets/passthejoint.gif'; // Update the path as needed
+import passTheJointImage from './assets/PassTheJoint.gif'; // Update the path as needed
 
 const rpcUrl = "https://sonic.drpc.org";
 const chainId = 146; // Replace with the correct chain ID for Sonic Mainnet
