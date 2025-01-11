@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import "./App.css";
+import paintswapImage from './assets/paintswap.png'; // Update the path as needed
+import twitterImage from './assets/twitter.png'; // Update the path as needed
+import telegramImage from './assets/telegram.png'; // Update the path as needed
+import passTheJointImage from './assets/passthejoint.png'; // Update the path as needed
 
 const rpcUrl = "https://sonic.drpc.org";
 const chainId = 146; // Replace with the correct chain ID for Sonic Mainnet
@@ -99,6 +103,31 @@ function App() {
 
   return (
     <div className="App">
+      <header className="App-header">
+        <h1>$STONER UPCOMING TOKEN IDS</h1>
+        <p>Trade $JOINT for $STONER on Equalizer</p>
+        <p>$STONER CA: 0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb</p>
+        <p>
+          View on Paintswap:{" "}
+          <a href="https://paintswap.io/sonic/collections/0x9b567e03d891f537b2b7874aa4a3308cfe2f4fbb/nfts" target="_blank" rel="noopener noreferrer">
+            https://paintswap.io/sonic/collections/0x9b567e03d891f537b2b7874aa4a3308cfe2f4fbb/nfts
+          </a>
+        </p>
+        <div className="ButtonContainer">
+          <a href="https://paintswap.io/sonic/collections/0x9a303054c302b180772a96caded9858c7ab92e99/listings" target="_blank" rel="noopener noreferrer">
+            <img src={paintswapImage} alt="PaintSwap" />
+          </a>
+          <a href="https://x.com/PassThe_JOINT" target="_blank" rel="noopener noreferrer">
+            <img src={twitterImage} alt="Twitter" />
+          </a>
+          <a href="https://t.me/jointonsonic" target="_blank" rel="noopener noreferrer">
+            <img src={telegramImage} alt="Telegram" />
+          </a>
+          <a href="https://passthejoint.netlify.app/" target="_blank" rel="noopener noreferrer">
+            <img src={passTheJointImage} alt="Pass the $JOINT" />
+          </a>
+        </div>
+      </header>
       {error ? (
         <div className="error-screen">
           <h1>Error</h1>
