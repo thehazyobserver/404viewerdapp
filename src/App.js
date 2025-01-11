@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import "./App.css";
 
-const rpcUrl = "https://rpc.soniclabs.com";
+const rpcUrl = "https://sonic.drpc.org";
+const chainId = 146; // Replace with the correct chain ID for Sonic Mainnet
 const contractAddress = "0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb";
 const abi = [
   {
