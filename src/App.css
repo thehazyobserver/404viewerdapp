@@ -13,7 +13,7 @@
 
 .nft-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   padding: 20px;
   max-width: 1200px;
@@ -66,4 +66,16 @@
   color: #fff;
   border: none;
   border-radius: 5px;
+}
+
+@media (min-width: 600px) {
+  .nft-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (min-width: 900px) {
+  .nft-card {
+    width: calc(33.333% - 20px);
+  }
 }
