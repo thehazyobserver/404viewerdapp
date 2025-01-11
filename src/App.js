@@ -57,7 +57,7 @@ function App() {
         }
 
         const nftData = await Promise.all(nftPromises);
-        setNFTs((prevNFTs) => [...prevNFTs, ...nftData.reverse()]);
+        setNFTs((prevNFTs) => [...prevNFTs, ...nftData]);
       } catch (err) {
         console.error("Error fetching NFTs:", err);
         setError("Failed to load NFTs from the blockchain.");
