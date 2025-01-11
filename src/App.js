@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import "./App.css";
-import paintswapImage from './assets/paintswap.png'; // Update the path as needed
-import twitterImage from './assets/twitter.png'; // Update the path as needed
+import paintswapImage from './assets/paintswap.svg'; // Update the path as needed
+import twitterImage from './assets/x.png'; // Update the path as needed
 import telegramImage from './assets/telegram.png'; // Update the path as needed
 import passTheJointImage from './assets/passthejoint.png'; // Update the path as needed
 
