@@ -9,15 +9,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 10px; /* Adjusted for mobile */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* NFT Gallery Layout */
 .nft-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit adjusts based on screen size */
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adapts for smaller screens */
+  gap: 15px;
+  padding: 10px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -25,7 +26,7 @@
 /* NFT Card Styles */
 .nft-card {
   background: #333;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -36,12 +37,13 @@
 
 .nft-card img {
   max-width: 100%;
+  height: auto; /* Ensure images scale properly */
   border-radius: 10px;
 }
 
 .nft-card h3 {
   margin: 10px 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .nft-card p {
@@ -86,8 +88,8 @@
 .ButtonContainer {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
   gap: 10px;
-  flex-wrap: wrap;
   margin-top: 20px;
 }
 
@@ -129,27 +131,32 @@
     font-size: 0.9rem;
   }
 
+  .ButtonContainer img {
+    width: 30px;
+    height: 30px;
+  }
+
   .nft-card h3 {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .nft-card p, .nft-card ul li {
     font-size: 0.8rem;
   }
 
-  .ButtonContainer img {
-    width: 30px;
-    height: 30px;
+  .load-more {
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }
 
 @media (min-width: 768px) {
   .nft-gallery {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Slightly larger cards for tablets */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Slightly larger cards for tablets */
   }
 
   .nft-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .nft-card p {
