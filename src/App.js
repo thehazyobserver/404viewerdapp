@@ -105,7 +105,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>UPCOMING $STONER TOKEN IDS</h1>
-        <p>Trade $JOINT for $STONER on Equalizer</p>
+        <p>
+          <a href="https://equalizer.exchange/swap?fromToken=0xC046dCb16592FBb3F9fA0C629b8D93090dD4cB76&toToken=0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb" target="_blank" rel="noopener noreferrer">
+            Trade $JOINT for $STONER on Equalizer
+          </a>
+        </p>
         <p>$STONER CA: 0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb</p>
         <p>
           View on Paintswap:{" "}
