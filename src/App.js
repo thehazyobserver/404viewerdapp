@@ -107,7 +107,7 @@ function App() {
         <h1>UPCOMING $STONER TOKEN IDS</h1>
         <p>
           <a href="https://www.shadow.so/trade?inputCurrency=0x0000000000000000000000000000000000000000&outputCurrency=0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb" target="_blank" rel="noopener noreferrer">
-            Trade $STONER on Shadow Exchange. Copy & PASTE CA in: 0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb
+            Trade $STONER on Shadow Exchange.
           </a>
         </p>
         <p>$STONER CA: 0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb</p>
