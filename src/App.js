@@ -6,7 +6,7 @@ import twitterImage from './assets/x.png'; // Update the path as needed
 import telegramImage from './assets/telegram.png'; // Update the path as needed
 import passTheJointImage from './assets/PassTheJoint.gif'; // Update the path as needed
 
-const rpcUrl = "https://sonic.drpc.org";
+const rpcUrl = "https://sonic-mainnet.g.alchemy.com/v2/TgpAKOwe0TjYXt1v2vl0i3gQ13apvFaV";
 const chainId = 146; // Replace with the correct chain ID for Sonic Mainnet
 const contractAddress = "0x9b567e03d891F537b2B7874aA4A3308Cfe2F4FBb";
 const abi = [
